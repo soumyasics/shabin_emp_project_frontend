@@ -1,47 +1,22 @@
 // To enter employee complete information by HR manager or by Admin 
 import React from 'react'
-import { Link } from 'react-router-dom'
-import img1 from '../img/LogoHermes.png'
+import SidebarHr from './SidebarHr'
+import NavbarHr from './NavbarHr'
 
 
-function EmployeeForum() {
+function EditEmployee() {
     return (
-        <>
-            <div class="d-flex bg-secondary-subtle" id="wrapper">
 
-                <div class="bg-white" id="sidebar-wrapper">
-                    <div class="container-fluid sidebar-heading text-center py-4 primary-text fs-5 border-bottom">
-                        <Link class="navbar-brand" to="#">
-                            <img src={img1} alt="Logo" width="50" class="d-inline-block" />
-                            Hermes Systems
-                        </Link>
-                    </div>
+        <div class="d-flex  bg-secondary-subtle" id="wrapper">
 
-                    <div class="list-group list-group-flush my-3 " id="sidebaritem">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
-                            <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-house me-2"></i> Home
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-calendar me-2"></i> Calender
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-person-workspace me-2"></i> Projects
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-ticket me-2"></i> Tickets
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-gift me-2"></i> Products
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-                            <i class="bi bi-box-arrow-left me-2"></i> Logout
-                        </a>
-                    </div>
-                </div>
-                {/* Sidebar ends here */}
+            {/* Sidebar starts here */}
+            <SidebarHr />
+            {/* Sidebar ends here */}
+            <div id="page-content-wrapper">
+
+                {/* Navbar starts */}
+                <NavbarHr />
+                {/* Navbar ends */}
 
                 {/* Form Body starts here  */}
                 <form class="row g-3">
@@ -75,8 +50,8 @@ function EmployeeForum() {
                         <input type="text" class="form-control" id="project4" />
                     </div>
                     <div class="col-md-4">
-                        <label for="unknown4" class="form-label">Unknown</label>
-                        <input type="text" class="form-control" id="unknown4" />
+                        <label for="unknown4" class="form-label">Date of Joining</label>
+                        <input type="date" class="form-control" id="unknown4" />
                     </div>
 
                     <p class="fw-bolder mb-0 mt-5 ps-4">Permanent Adress</p>
@@ -227,11 +202,6 @@ function EmployeeForum() {
                         <input type="text" class="form-control" id="institute8" placeholder="" />
                     </div>
 
-
-
-
-
-
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary bg-success"><i class="bi bi-upload"></i> Update</button>
                     </div>
@@ -243,10 +213,11 @@ function EmployeeForum() {
                     </div>
                 </form>
                 {/* Form Body Ends here  */}
-            </div>
 
-        </>
+            </div>
+        </div>
+
     )
 }
 
-export default EmployeeForum
+export default EditEmployee
