@@ -1,10 +1,11 @@
-import React, {  useState } from 'react'
-import './Signup.css'
+import React, { useState } from 'react'
+import './AdminSignup.css'
 import img1 from '../img/LogoHermes.png'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
-function Signup() {
+function AdminSignup() {
+  
     const [form, setForm] = useState({ fullname: '', employeeid: '', email: '', newpassword: '', confirmpassword:'' })
     const navigate=useNavigate()
     function change(e) {
@@ -17,11 +18,11 @@ function Signup() {
 
         if (confirmpassword===newpassword){
             e.preventDefault()
-        axios.post('http://localhost:3001/signup',form)
+        axios.post('http://localhost:3001/adminsignup',form)
         .then((res)=>{
             console.log(res.data);
             alert("You are signed Up sucessfully")
-            navigate('/login')
+            navigate('/adminlogin')
         })
         .catch((err)=>{
             console.error(err);
@@ -52,7 +53,7 @@ function Signup() {
 
                         <div class="text-center mb-5">
                             <h3 class="fw-bold">Sign Up</h3>
-                            <p class="text-secondary">Register your account</p>
+                            <p class="text-secondary">Admin</p>
                         </div>
 
                         {/* Form */}
@@ -93,7 +94,7 @@ function Signup() {
                         {/* Form Ends*/}
 
                         <div class="text-center">                            
-                            <small>Already have an account? <Link to='/login' class='fw-bold'> Login</Link></small>
+                            <small>Already have an account? <Link to='/adminlogin' class='fw-bold'> Login</Link></small>
                         </div>
                     </div>
                 </div>
@@ -103,4 +104,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default AdminSignup

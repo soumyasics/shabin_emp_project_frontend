@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import './HrandAdminLogin.css'
+import './HRLogin.css'
 import img1 from '../img/LogoHermes.png'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-function HrandAdminLogin() {
+function HRLogin() {
 
     const [form, setForm] = useState({ fullname: '', password: '' });
+    const navigate = useNavigate()
 
     function change(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -14,10 +15,13 @@ function HrandAdminLogin() {
     function submit(e) {
         e.preventDefault()
 
-        axios.post('http://localhost:3001/hroradminlogin', form)
+        axios.post('http://localhost:3001/hrlogin', form)
             .then((res) => {
-                console.log(res.data);
-                alert("processed")
+                if(res.data.status===200)
+                navigate('/hrhome')
+            else{
+                alert('usename or password mismatch')
+            }
             }).catch((err) => {
                 console.error(err);
                 alert("failed")
@@ -43,7 +47,7 @@ function HrandAdminLogin() {
 
                         <div class="text-center mb-5">
                             <h3 class="fw-bold">Log In</h3>
-                            <p class="text-secondary">HR or ADMIN</p>
+                            <p class="text-secondary">HR</p>
                         </div>
 
                         {/* Form */}
@@ -74,7 +78,7 @@ function HrandAdminLogin() {
                         {/* Form Ends*/}
 
                         <div class="text-center">
-                            <small>Don't have an account? <Link to='/signup' class='fw-bold'>Signup</Link></small>
+                            <small>Don't have an account? <Link to='/hrsignup' class='fw-bold'>Signup</Link></small>
                         </div>
                     </div>
                 </div>
@@ -84,4 +88,4 @@ function HrandAdminLogin() {
     )
 
 }
-export default HrandAdminLogin
+export default HRLogin

@@ -1,9 +1,10 @@
 import React from 'react'
 import './Navbar.css'
+import img1 from '../img/LogoHermes.png'
 
 function Navbar() {
     return (
-        <nav class="navbar navbar-expand-lg navbar-light  p-4 m-1">
+        <nav class="navbar navbar-expand-lg navbar-light  p-3 m-1">
 
             <div class="d-flex align-item-center">
                 <h2 class="fs-2 mx-6 "> Dashboard</h2>
@@ -30,7 +31,8 @@ function Navbar() {
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link active dropdown-toggle second-text fw-bold" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person me-0"></i>John Doe
+                            <img src={img1} alt="Logo" width="50" class="d-inline-block pe-1 rounded-circle" />
+                            John Doe
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a href="#" class="dropdown-item">Profile</a></li>

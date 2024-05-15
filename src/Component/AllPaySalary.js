@@ -1,18 +1,17 @@
+// To select a particular employee to paysalary
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import SidebarAdmin from './SidebarAdmin'
 import NavbarAdmin from './NavbarAdmin'
 
 
-function AllEmployees() {
+function AllPaySalary() {
     const [detail, setDetail] = useState([{}])
 
-
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/allemployee')
+        axios.get('http://localhost:3001/allemployee')
             .then((res => {
                 setDetail(res.data.data)
             }))
@@ -53,9 +52,7 @@ function AllEmployees() {
                                     <th scope="row">{a.employee_name}</th>
                                     <td>{a.Designation}</td>
                                     <td>{new Date(a.date_of_joining).toLocaleDateString()}</td>
-                                    <td><Link to={`/admin/editemployees/${a._id}`}><button type="button" class="btn btn-primary btn-sm">Edit</button></Link>
-                                    <Link to={`/admin/delete/${a._id}`}><button type="button" class="btn btn-primary btn-sm">delete</button></Link>                                    
-                                    </td>
+                                    <td><Link to={`/paysalary/${a._id}`}><button type="button" class="btn btn-primary btn-sm">Pay Salary</button></Link></td>
                                 </tr>
                             </tbody>
                         ))}
@@ -68,4 +65,4 @@ function AllEmployees() {
     )
 }
 
-export default AllEmployees
+export default AllPaySalary

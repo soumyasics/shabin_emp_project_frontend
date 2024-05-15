@@ -17,27 +17,27 @@ function Sidebar() {
                     </div>
 
                     <div class="list-group list-group-flush my-3 " id="sidebaritem">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
                             <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        </Link>
+                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                             <i class="bi bi-house me-2"></i> Home
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        </Link>
+                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                             <i class="bi bi-calendar me-2"></i> Calender
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-person-workspace me-2"></i> Projects
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        </Link>
+                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                            <i class="bi bi-person-workspace me-2"></i> Tasks
+                        </Link>
+                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                             <i class="bi bi-ticket me-2"></i> Tickets
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                            <i class="bi bi-gift me-2"></i> Products
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                        </Link>
+                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        <i class="bi bi-cash me-2"></i> Salary
+                        </Link>
+                        <Link href="/" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                             <i class="bi bi-box-arrow-left me-2"></i> Logout
-                        </a>
+                        </Link>
                     </div>
                 </div>
   )

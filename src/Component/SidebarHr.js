@@ -16,27 +16,30 @@ function SidebarHr() {
             </div>
 
             <div class="list-group list-group-flush my-3 " id="sidebaritem">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+                <Link to="#" class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                </Link>
+                <Link to='/hrhome' class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="bi bi-house me-2"></i> Home
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                </Link>
+                <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="bi bi-kanban me-2"></i> Management
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                </Link>
+                <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="bi bi-calendar3 me-2"></i> Time Sheet
-                </a>
-                <a href="/allemployees" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                </Link>
+                <Link to="/allemployees" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="bi bi-people me-2"></i> Employees
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="bi bi-cash-stack me-2"></i> Transactions
-                </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                </Link>
+                <Link to="/paysalary" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="bi bi-bank me-2"></i> Payment
+                </Link>
+                <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="bi bi-cash-stack me-2"></i> Transaction History
+                </Link>
+                <Link to="/" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="bi bi-box-arrow-left me-2"></i> Logout
-                </a>
+                </Link>
             </div>
         </div>
     )
