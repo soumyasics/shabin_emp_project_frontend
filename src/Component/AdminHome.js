@@ -12,7 +12,7 @@ function AdminHome() {
       <SidebarAdmin />
       {/* Sidebar ends */}
 
-      <div id="page-content-wrapper">
+      <div className='w-100' id="page-content-wrapper">
 
         {/* Navbar starts */}
         <NavbarAdmin />

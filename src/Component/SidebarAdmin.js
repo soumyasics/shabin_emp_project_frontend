@@ -25,7 +25,7 @@ function SidebarAdmin() {
                 <Link to="/admin/addemployees" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="bi bi-kanban me-2"></i> Add Employee
                 </Link>
-                <Link to="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <Link to="/admin/timesheet" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="bi bi-calendar3 me-2"></i> Time Sheet
                 </Link>
                 <Link to="/allemployees" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">

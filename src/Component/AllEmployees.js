@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import SidebarAdmin from './SidebarAdmin'
 import NavbarAdmin from './NavbarAdmin'
 
@@ -29,7 +29,7 @@ function AllEmployees() {
             <SidebarAdmin />
             {/* Sidebar ends */}
 
-            <div class="page-content-wrapper">
+            <div className='w-100' id="page-content-wrapper">
                 {/* Navbar starts */}
                 <NavbarAdmin />
                 {/* Navbar Ends */}

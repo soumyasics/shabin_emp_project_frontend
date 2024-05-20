@@ -32,7 +32,7 @@ function Sidebar() {
                         <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                             <i class="bi bi-ticket me-2"></i> Tickets
                         </Link>
-                        <Link href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        <Link to='/employee/salary' class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i class="bi bi-cash me-2"></i> Salary
                         </Link>
                         <Link href="/" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">

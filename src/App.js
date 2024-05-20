@@ -29,10 +29,8 @@ import AddEmployees from './Component/Addemployees';
 import EditEmployees from './Component/EditEmployees';
 import DeleteEmployee from './Component/DeleteEmployee';
 import AllTransactionHistory from './Component/AllTransactionHistory';
-
-
-
-
+import AdminTimeSheet from './Component/AdminTimeSheet';
+import EmployeeSalary from './Component/EmployeeSalary';
 function App() {
   return (
     <BrowserRouter>
@@ -72,8 +70,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/employeehome' element={<EmployeeHome />} />
         <Route path='/employeeprofile' element={<EmployeeProfile />} />
+        <Route path='employee/salary' element={<EmployeeSalary/>}/>
         {/* no api */}
-        <Route path='/calenderemployee' element={<CalenderEmployee />} />
+        <Route path='employee/calender' element={<CalenderEmployee />} />
 
 
         <Route path='/hrsignup' element={<HrandAdminSignup />} />
@@ -81,7 +80,7 @@ function App() {
         <Route path='/hrhome' element={<HrHome />} />
         <Route path='/allemployees' element={<AllEmployees />} />
 
-
+        {/* Admin */}
         <Route path='/adminsignup' element={<AdminSignup />} />
         <Route path='/adminlogin' element={<AdminLogin />} />
         <Route path='/adminhome' element={<AdminHome />} />
@@ -92,8 +91,9 @@ function App() {
         <Route path='/allsalary' element={<AllPaySalary />} />
 
         <Route path='/admin/editemployees/:id' element={<EditEmployees />} />
-        <Route path='/admin/delete/:id' element={<DeleteEmployee/>}/>
-        <Route path='/admin/transactionhistoty' element={<AllTransactionHistory/>}/>
+        <Route path='/admin/delete/:id' element={<DeleteEmployee />} />
+        <Route path='/admin/transactionhistoty' element={<AllTransactionHistory />} />
+        <Route path='/admin/timesheet' element={<AdminTimeSheet />} />
 
 
         {/* Complete Component Ends */}

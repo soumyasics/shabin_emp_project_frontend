@@ -28,12 +28,12 @@ function AllPaySalary() {
             <SidebarAdmin />
             {/* Sidebar ends */}
 
-            <div class="page-content-wrapper">
+            <div className='w-100' id="page-content-wrapper">
                 {/* Navbar starts */}
                 <NavbarAdmin />
                 {/* Navbar Ends */}
 
-                <h3 class="my-4 mx-2 p-2 rounded text-center bg-white">Employee Details</h3>
+                <h3 class="my-4 mx-2 p-2 rounded text-center bg-white">Employee Payment</h3>
 
                 <div class="container-fluid">
 
