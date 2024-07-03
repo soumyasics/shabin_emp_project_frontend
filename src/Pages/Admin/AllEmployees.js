@@ -31,7 +31,6 @@ function AllEmployees() {
             })
     }
 
-
     return (
 
         <div className="d-flex  bg-secondary-subtle" id='wrapper'>
@@ -82,7 +81,7 @@ function AllEmployees() {
                 </div>
             </div>
             {/* Modal starts */}
-            <div className="modal fade" id={'exampleModal'} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id={'exampleModal'} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-md modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -95,7 +94,7 @@ function AllEmployees() {
                         <div className="modal-footer">
                             <div className='d-flex'>
                                 <button type="button" className="btn btn-success" data-bs-dismiss="modal">No</button>
-                                <button type="button" onClick={deleteEmployee} className="btn btn-danger ms-2" data-bs-dismiss="modal">Terminate</button>
+                                <button type="button" onClick={deleteEmployee} className="btn btn-danger ms-2" data-bs-dismiss="modal">Delete</button>
                             </div>
                         </div>
                     </div>

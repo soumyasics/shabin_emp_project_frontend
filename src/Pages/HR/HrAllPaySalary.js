@@ -3,12 +3,11 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import SidebarAdmin from '../../Component/Admin/SidebarAdmin'
-import NavbarAdmin from '../../Component/Admin/NavbarAdmin'
+import SidebarHr from '../../Component/HR/SidebarHr'
+import NavbarHr from '../../Component/HR/NavbarHr'
 
-
-function AllPaySalary() {
-    const [detail, setDetail] = useState([])
+const HrAllPaySalary = () => {
+    const [detail, setDetail] = useState([{}])
 
     useEffect(() => {
         axios.get('http://localhost:3001/allemployee')
@@ -19,18 +18,15 @@ function AllPaySalary() {
                 setDetail(err)
             }))
     }, [])
-
-
     return (
-
-        <div className="d-flex  bg-secondary-subtle" id='wrapper'>
+        <div class="d-flex  bg-secondary-subtle" id='wrapper'>
             {/* Sidebar starts */}
-            <SidebarAdmin />
+            <SidebarHr />
             {/* Sidebar ends */}
 
             <div className='w-100' id="page-content-wrapper">
                 {/* Navbar starts */}
-                <NavbarAdmin />
+                <NavbarHr />
                 {/* Navbar Ends */}
 
                 <h3 className="my-4 mx-2 p-2 rounded text-center bg-white">Employee Payment</h3>
@@ -46,24 +42,22 @@ function AllPaySalary() {
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {detail.map((a, index) => (
-                                <tr key={a._id}>
+                        {detail.map((a) => (
+                            <tbody>
+                                <tr>
                                     <th scope="row">{a.employee_name}</th>
                                     <td>{a.designation}</td>
                                     <td>{new Date(a.date_of_joining).toLocaleDateString()}</td>
-                                    <td><Link to={`/paysalary/${a._id}`}><button type="button" className="btn btn-primary btn-sm">Pay Salary</button></Link></td>
+                                    <td><Link to={`/hr/paysalary/${a._id}`}><button type="button" className="btn btn-primary btn-sm">Pay Salary</button></Link></td>
                                 </tr>
-                            ))}
-                        </tbody>
-
+                            </tbody>
+                        ))}
                     </table>
 
                 </div>
             </div>
         </div>
-
     )
 }
 
-export default AllPaySalary
+export default HrAllPaySalary

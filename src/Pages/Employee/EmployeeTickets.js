@@ -47,50 +47,50 @@ const EmployeeTickets = () => {
         <Navbar />
         <h3 className="my-4 mx-2 p-2 rounded text-center bg-white shadow">Tickets</h3>
         <div className='container'>
-          <form class="row g-3">
-            <div class="col-md-6">
-              <label for="employeeid" class="form-label">Employee ID</label>
-              <input class="form-control" id="employeeid"
+          <form className="row g-3">
+            <div className="col-md-6">
+              <label for="employeeid" className="form-label">Employee ID</label>
+              <input className="form-control" id="employeeid" readOnly
                 type="number"
                 name='employee_id'
                 value={form.employee_id}
                 onChange={handleChange}
               />
             </div>
-            <div class="col-md-6">
-              <label for="employeename" class="form-label">Employee Name</label>
-              <input class="form-control" id="employeename"
+            <div className="col-md-6">
+              <label for="employeename" className="form-label">Employee Name</label>
+              <input className="form-control" id="employeename" readOnly
                 type="text"
                 name='employee_name'
                 value={form.employee_name}
                 onChange={handleChange}
               />
             </div>
-            <div class="col-md-6">
-              <label for="subject" class="form-label">Subject</label>
-              <input class="form-control" id="subject"
+            <div className="col-md-6">
+              <label for="subject" className="form-label">Subject</label>
+              <input className="form-control" id="subject"
                 type="text"
                 name='subject'
                 value={form.subject}
                 onChange={handleChange}
               />
             </div>
-            <div class="col-md-6">
-              <label for="inputState" class="form-label">Type</label>
-              <select id="inputState" class="form-select"
+            <div className="col-md-6">
+              <label for="inputState" className="form-label">Type</label>
+              <select id="inputState" className="form-select"
                 name='type'
                 value={form.type}
                 onChange={handleChange}
               >
-                <option selected>Choose...</option>
+                <option value='' disabled>Choose...</option>
                 <option>High Priority</option>
                 <option>Medium Priority</option>
                 <option>Low Priority</option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label">Explain here</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+            <div className="mb-3">
+              <label for="exampleFormControlTextarea1" className="form-label">Explain here</label>
+              <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
                 type="textarea"
                 name='explain'
                 value={form.explain}
@@ -98,8 +98,8 @@ const EmployeeTickets = () => {
               ></textarea>
             </div>
             <div className='row justify-content-end p-0 m-0'>
-              <div class="col-3" >
-                <button type="button" onClick={handleSubmit} class="btn btn-primary">Submit</button>
+              <div className="col-3" >
+                <button type="button" onClick={handleSubmit} className="btn btn-primary">Submit</button>
               </div>
             </div>
           </form>

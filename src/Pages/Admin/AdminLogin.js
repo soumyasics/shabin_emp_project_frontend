@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import img1 from '../../img/LogoHermes.png'
-import axios from 'axios'
+import React, { useState } from 'react';
+import img1 from '../../img/LogoHermes.png';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
@@ -16,9 +16,11 @@ function AdminLogin() {
 
         axios.post('http://localhost:3001/adminlogin', form)
             .then((res) => {
-                if(res.data.status===200)
+                if (res.data.status === 200) {
+                    localStorage.setItem('isAdminLoggedIn', true)
                     navigate('/adminhome')
-                else{
+                }
+                else {
                     alert('username or password mismatch')
                 }
             }).catch((err) => {
@@ -41,7 +43,7 @@ function AdminLogin() {
                     <div className="col col-sm-6 col-lg-7 col-xl-6 button ">
 
                         {/* Logo */}
-                        <Link to='#' className="d-flex justify-content-center mb-4"><img src={img1} alt=''  width="60" /></Link>
+                        <Link to='#' className="d-flex justify-content-center mb-4"><img src={img1} alt='' width="60" /></Link>
                         {/* Logo Ends*/}
 
                         <div className="text-center mb-5">
@@ -69,7 +71,7 @@ function AdminLogin() {
                                 <div className="form-check">
                                 </div>
                                 <div>
-                                    <small><Link to='#' className='fw-bold'>Forgot Password</Link></small>
+                                    <small><Link to='/admin/resetpassword' className='fw-bold'>Forgot Password</Link></small>
                                 </div>
                             </div>
                             <button className='btn btn-primary mb-3' type="submit">Login</button>

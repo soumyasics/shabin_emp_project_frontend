@@ -15,15 +15,16 @@ function Login() {
     function submit(e) {
         e.preventDefault()
 
-        axios.post('http://localhost:3001/login', form,{withCredentials:true})
+        axios.post('http://localhost:3001/login', form, { withCredentials: true })
 
             .then((res) => {
-                if(res.data.status===200)
-                navigate('/employeehome')
-            else
-            {
-                alert('emailid or password mismatch')
-            }
+                if (res.data.status === 200) {
+                    localStorage.setItem('isEmployeeLoggedIn', true)
+                    navigate('/employeeprofile')
+                }
+                else {
+                    alert('emailid or password mismatch')
+                }
             }).catch((err) => {
                 console.error(err);
                 alert("failed")
@@ -31,57 +32,57 @@ function Login() {
     }
 
     return (
-        <div class="row vh-100 g-0">
+        <div className="row vh-100 g-0">
             {/* Left Side starts*/}
-            <div class="col-lg-6 position-relative d-none d-lg-block">
-                <div class="bg-holder" ></div>
+            <div className="col-lg-6 position-relative d-none d-lg-block">
+                <div className="bg-holder" ></div>
             </div>
             {/* Left Side Ends */}
 
             {/* Right Side starts*/}
-            <div class="col-lg-6">
-                <div class="row align-items-center justify-content-center h-100 g-0 px-4 px-sm-0">
-                    <div class="col col-sm-6 col-lg-7 col-xl-6 button ">
+            <div className="col-lg-6">
+                <div className="row align-items-center justify-content-center h-100 g-0 px-4 px-sm-0">
+                    <div className="col col-sm-6 col-lg-7 col-xl-6 button ">
 
                         {/* Logo */}
-                        <Link to='#' class="d-flex justify-content-center mb-4"><img src={img1} alt='' width="60" /></Link>
+                        <Link to='#' className="d-flex justify-content-center mb-4"><img src={img1} alt='' width="60" /></Link>
                         {/* Logo Ends*/}
 
-                        <div class="text-center mb-5">
-                            <h3 class="fw-bold">Log In</h3>
-                            <p class="text-secondary">Get access to your account</p>
+                        <div className="text-center mb-5">
+                            <h3 className="fw-bold">Log In</h3>
+                            <p className="text-secondary">Get access to your account</p>
                         </div>
 
                         {/* Form starts*/}
                         <form onSubmit={submit} >
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">
-                                    <i class="bi bi-envelope-at"></i>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text">
+                                    <i className="bi bi-envelope-at"></i>
                                 </span>
-                                <input type="email" class="form-control form-control-lg fs-6" placeholder='E-mail' name='email' onChange={change} />
+                                <input type="email" className="form-control form-control-lg fs-6" placeholder='E-mail' name='email' onChange={change} />
                             </div>
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">
-                                    <i class="bi bi-lock"></i>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text">
+                                    <i className="bi bi-lock"></i>
                                 </span>
-                                <input type='password' class="form-control form-control-lg fs-6" placeholder='Password' name='password' onChange={change} />
+                                <input type='password' className="form-control form-control-lg fs-6" placeholder='Password' name='password' onChange={change} />
                             </div>
-                            <div class="input-group mb-3 d-flex justify-content-between">
-                                <div class="form-check">
+                            <div className="input-group mb-3 d-flex justify-content-between">
+                                <div className="form-check">
                                 </div>
                                 <div>
-                                    <small><Link to='#' class='fw-bold'>Forgot Password?</Link></small>
+                                    <small><Link to='/resetpassword' className='fw-bold'>Forgot Password?</Link></small>
 
                                 </div>
                             </div>
-                            <button class='btn btn-primary mb-3' type="submit">Login</button>
+                            <button className='btn btn-primary mb-3' type="submit">Login</button>
                         </form>
                         {/* Form Ends*/}
 
-                        <div class="text-center">
-                            <small>Don't have an account?<Link to='/signup' class='fw-bold'> Signup</Link></small>
+                        <div className="text-center">
+                            <small>Don't have an account?<Link to='/signup' className='fw-bold'> Signup</Link></small>
                         </div>
                     </div>
                 </div>

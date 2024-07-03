@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SidebarAdmin from '../../Component/Admin/SidebarAdmin';
-import NavbarAdmin from '../../Component/Admin/NavbarAdmin';
+import SidebarHr from '../../Component/HR/SidebarHr';
+import NavbarHr from '../../Component/HR/NavbarHr';
 
-const ApprovedLeaveRequest = () => {
-    const [approvedLeaves, setApprovedLeaves] = useState([])
+const HrRejectedLeaveRequest = () => {
+    const [rejectedLeaves, setRejectedLeaves] = useState([])
     const [leaveDetail, setLeaveDetail] = useState('')
+
     useEffect(() => {
         axios
-            .get('http://localhost:3001/admin/approvedLeave')
-            .then((res => {
-                setApprovedLeaves(res.data.data)
-            }))
-            .catch((err => {
-                console.error('Error in getting Approved leave', err);
-            }))
+            .get('http://localhost:3001/hr/rejectedLeave')
+            .then((res) => {
+                setRejectedLeaves(res.data.data)
+            })
+            .catch((err) => {
+                console.error('Error in fetching rejected leaves', err)
+            })
     }, [])
     return (
         <div className='d-flex bg-secondary-subtle ' id='wrapper'>
-            <SidebarAdmin />
+            <SidebarHr />
             <div className='w-100' id='page-content-wrapper'>
-                <NavbarAdmin />
-                <h3 className='my-4 mx-2 p-2 rounded text-center bg-white shadow text-success'>Approved Leave Request</h3>
+                <NavbarHr />
+                <h3 className='my-4 mx-2 p-2 rounded text-center bg-white shadow text-danger'>Rejected Leave Request</h3>
 
                 <div className='table-responsive m-1 rounded'>
-                    <table className="table table-success">
+                    <table className="table table-danger table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
@@ -37,7 +38,7 @@ const ApprovedLeaveRequest = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {approvedLeaves.map((leave, index) => (
+                            {rejectedLeaves.map((leave, index) => (
                                 <tr key={index}>
                                     <th scope="row">{index + 1}</th>
                                     <td>{leave.employee_name}</td>
@@ -46,7 +47,7 @@ const ApprovedLeaveRequest = () => {
                                     <td>{new Date(leave.from).toLocaleDateString()}</td>
                                     <td>{new Date(leave.to).toLocaleDateString()}</td>
                                     <td className='text-center'>
-                                        <button type='button' className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => setLeaveDetail(leave)}> View</button>
+                                        <button type='button' className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#viewModal" onClick={() => setLeaveDetail(leave)} > View</button>
                                     </td>
                                 </tr>
                             ))}
@@ -82,4 +83,4 @@ const ApprovedLeaveRequest = () => {
     )
 }
 
-export default ApprovedLeaveRequest
+export default HrRejectedLeaveRequest

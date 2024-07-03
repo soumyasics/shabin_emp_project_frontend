@@ -1,72 +1,49 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import SidebarAdmin from '../../Component/Admin/SidebarAdmin';
-import NavbarAdmin from '../../Component/Admin/NavbarAdmin';
+import SidebarHr from '../../Component/HR/SidebarHr';
+import NavbarHr from '../../Component/HR/NavbarHr';
 
-const Management = () => {
+const HrManagement = () => {
     const [form, setForm] = useState({})
-    const [loading, setLoading] = useState(false)
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        setLoading(true)
         axios
-            .post('http://localhost:3001/admin/tasks/create', form)
+            .post('http://localhost:3001/hr/tasks/create', form)
             .then((res) => {
                 console.log(res);
                 alert('Task Created')
-                setLoading(false)
                 setForm({})
             })
             .catch((err) => {
                 console.error('Error in creating task', err)
                 alert('Error in creating task')
-                setLoading(false)
             })
     }
-
     return (
         <div className='d-flex bg-secondary-subtle' id='wrapper'>
-            <SidebarAdmin />
+            <SidebarHr />
             <div className='w-100' id='page-content-wrapper'>
-                <NavbarAdmin />
+                <NavbarHr />
                 <h3 className='my-4 mx-2 p-2 rounded text-center bg-white shadow'>Management</h3>
                 <div className="container d-flex flex-row mt-4">
                     <div className="p-2 m-2 rounded flex-grow-1">
-                        <h5 className="text-center">Tickets</h5>
+                        <h5 className="text-center">Assign Tasks</h5>
+
                         <div className="d-flex flex-column justify-content-around">
                             <div className="bg-white p-2 m-1 rounded-2 border border-dark-subtle  text-center">
-                                <p className="text-danger">
-                                    <i className="bi bi-exclamation-triangle-fill"></i> High Priority Tickets
+                                <p className="text-info">
+                                    <i className="bi bi-exclamation-triangle-fill"></i> Task
                                 </p>
-                                <Link to="/admin/highprioritytickets" type="button" className="btn btn-outline-danger">View</Link>
-                            </div>
-
-                            <div className="bg-white p-2 m-1 rounded-2 border border-dark-subtle  text-center">
-                                <p className="text-warning">
-                                    <i className="bi bi-exclamation-circle-fill"></i> Medium Priority Tickets
-                                </p>
-                                <Link to="/admin/mediumprioritytickets" type="button" className="btn btn-outline-warning">View</Link>
-                            </div>
-                            <div className="bg-white p-2 m-1 rounded-2 border border-dark-subtle  text-center">
-                                <p className="text-success">
-                                    <i className="bi bi-clock-fill"></i> Low Priority Tickets
-                                </p>
-                                <Link to="/admin/lowprioritytickets" type="button" className="btn btn-outline-success">View</Link>
+                                <button type="button" className="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#taskModal">Asign task</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className='m-4 bg-white p-2 rounded w-25 shadow border-black border-1'>
-                    <p>Task Management</p>
-                    <button type="button" className="btn btn-info" data-bs-toggle="modal" data-bs-target="#taskModal">
-                        Asign Task
-                    </button>
-                </div>
+
                 {/* Model start */}
                 <div className="modal fade" id="taskModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
@@ -134,7 +111,7 @@ const Management = () => {
 
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Management;
+export default HrManagement

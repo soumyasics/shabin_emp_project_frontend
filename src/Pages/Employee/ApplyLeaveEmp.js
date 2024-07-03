@@ -16,12 +16,12 @@ const ApplyLeaveEmp = () => {
         typeOfLeave: '',
         reason: '',
     })
-    const navigate= useNavigate()
+    const navigate = useNavigate()
     useEffect(() => {
         axios
             .get('http://localhost:3001/employee/employeeprofile', { withCredentials: true })
             .then((res) => {
-                setForm(res.data)
+                setForm({ ...form, ...res.data })
             })
             .catch((err) => {
                 console.log(err);
@@ -32,12 +32,22 @@ const ApplyLeaveEmp = () => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
     const handleSubmit = (e) => {
+        e.preventDefault()
+        const days = (new Date(form.to) - new Date(form.from)) / (1000 * 60 * 60 * 24) + 1
         axios
-            .post('http://localhost:3001/employee/leaveapply', form, {withCredentials:true})
+            .post('http://localhost:3001/employee/leaveapply', form, { withCredentials: true })
             .then((res) => {
                 console.log(res);
                 alert('Leave Applied Successfully');
-                navigate('/employee/calenderemployee')
+                axios
+                    .post('http://localhost:3001/employee/updateLeaveBalance', {
+                        employee_id: form.employee_id,
+                        typeOfLeave: form.typeOfLeave,
+                        days: days,
+                    }, { withCredentials: true })
+                    .then(() => {
+                        navigate('/employee/calenderemployee')
+                    })
             })
             .catch((err) => {
                 console.log(err);
@@ -52,7 +62,7 @@ const ApplyLeaveEmp = () => {
                 <Navbar />
                 <h3 className='my-4 mx-2 p-2 rounded text-center bg-white shadow'>Apply Leave</h3>
                 <div className='container'>
-                    <form className='row g-3'>
+                    <form className='row g-3' onSubmit={handleSubmit}>
                         <div className='col-md-4'>
                             <label htmlFor='employeename' className='form-label'>Employee Name</label>
                             <input className='form-control' id='employeename'
@@ -60,6 +70,7 @@ const ApplyLeaveEmp = () => {
                                 name='employee_name'
                                 value={form.employee_name}
                                 onChange={handleOnChange}
+                                readOnly
                             />
                         </div>
                         <div className='col-md-4'>
@@ -69,6 +80,7 @@ const ApplyLeaveEmp = () => {
                                 name='employee_id'
                                 value={form.employee_id}
                                 onChange={handleOnChange}
+                                readOnly
                             />
                         </div>
                         <div className='col-md-4'>
@@ -78,6 +90,7 @@ const ApplyLeaveEmp = () => {
                                 name='designation'
                                 value={form.designation}
                                 onChange={handleOnChange}
+                                readOnly
                             />
                         </div>
                         <div className='col-md-4'>
@@ -105,15 +118,15 @@ const ApplyLeaveEmp = () => {
                                 value={form.typeOfLeave}
                                 onChange={handleOnChange}
                             >
-                                <option selected>Choose</option>
+                                <option value='' disabled>Choose</option>
                                 <option>Sick leave</option>
                                 <option>Casual leave</option>
                                 <option>Leave without pay</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Reason</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                        <div className="mb-3">
+                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Reason</label>
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
                                 type='textarea'
                                 name='reason'
                                 value={form.reason}
@@ -121,7 +134,7 @@ const ApplyLeaveEmp = () => {
                             ></textarea>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-primary bg-success" onClick={handleSubmit}><i class="bi bi-upload"></i> Apply</button>
+                            <button type="submit" className="btn btn-primary bg-success" ><i className="bi bi-upload"></i> Apply</button>
                         </div>
                     </form>
 

@@ -41,7 +41,24 @@ import AdminHighPriorityTickets from "./Pages/Admin/AdminHighPriorityTickets";
 import AdminMediumPriorityTickets from "./Pages/Admin/AdminMediumPriorityTickets";
 import AdminLowPriorityTickets from "./Pages/Admin/AdminLowPriorityTickets";
 import HrAllEmployees from "./Pages/HR/HrAllEmployees";
-import HrEditEmployees from "./Pages/HR/HrEditEmployees";
+import { EmployeeProvider } from "./Contex/EmployeeContex";
+import EmployeeLeaveStatus from "./Pages/Employee/EmployeeLeaveStatus";
+import ResetPassword from "./Pages/Admin/ResetPassword";
+import ResetPasswordEmployee from "./Pages/Employee/ResetPasswordEmployee";
+import HrResetPassword from "./Component/HR/HrResetPassword";
+import HrAllPaySalary from "./Pages/HR/HrAllPaySalary";
+import HrPaysalary from "./Pages/HR/HrPaysalary";
+import HrAllTransactionHistory from "./Pages/HR/HrAllTransactionHistory";
+import HrEmployeeLeaveRequest from "./Pages/HR/HrEmployeeLeaveRequest";
+import HrTimeSheet from "./Pages/HR/HrTimeSheet";
+import HrRejectedLeaveRequest from "./Pages/HR/HrRejectedLeaveRequest";
+import HrApprovedLeaveRequest from "./Pages/HR/HrApprovedLeaveRequest";
+import HrManagement from "./Pages/HR/HrManagement";
+import ProtectedRoute from "./Component/ProtectedRoute";
+import EmployeeProtectedRoute from "./Component/EmployeeProtectedRoute";
+import HrProtectedRoute from "./Component/HrProtectedRoute";
+
+// import withEmployeeProvider from "./Contex/WithEmployeeProviders";
 function App() {
   return (
     <BrowserRouter>
@@ -52,20 +69,15 @@ function App() {
 
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/resetpassword" element={<ResetPasswordEmployee />} />
 
         {/* Employee ends */}
-
-        {/* HR Starts */}
-
-        <Route path="/navbarhr" element={<NavbarHr />} />
-        <Route path="/sidebarhr" element={<SidebarHr />} />
-
-        {/* HR Ends */}
 
         {/* Admin starts */}
 
         <Route path="/navbaradmin" element={<NavbarAdmin />} />
         <Route path="/sidebaradmin" element={<SidebarAdmin />} />
+        <Route path="/admin/resetpassword" element={<ResetPassword />} />
 
         {/* Admin Ends */}
 
@@ -81,24 +93,25 @@ function App() {
         {/* Employee Login */}
         <Route path="/login" element={<Login />} />
         {/* Employee Home */}
-        <Route path="/employeehome" element={<EmployeeHome />} />
+        <Route path="/employeehome" element={<EmployeeProtectedRoute><EmployeeProvider><EmployeeHome /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/* Employee profile */}
-        <Route path="/employeeprofile" element={<EmployeeProfile />} />
-        <Route path="/employee/employeetasks" element={<EmployeeTasks />} />
+        <Route path="/employeeprofile" element={<EmployeeProtectedRoute><EmployeeProvider><EmployeeProfile /></EmployeeProvider></EmployeeProtectedRoute>} />
+        {/* Manage task */}
+        <Route path="/employee/employeetasks" element={<EmployeeProtectedRoute><EmployeeProvider><EmployeeTasks /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/* Employee salary details */}
-        <Route path="/employee/salary" element={<EmployeeSalary />} />
+        <Route path="/employee/salary" element={<EmployeeProtectedRoute><EmployeeProvider><EmployeeSalary /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/* Employee Leave request */}
-        <Route path="/employee/leaverequest" element={<LeaveRequest />} />
+        <Route path="/employee/leaverequest" element={<EmployeeProtectedRoute><EmployeeProvider><LeaveRequest /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/* Related to leave and attendance */}
-        <Route path="/employee/calenderemployee" element={<CalenderEmployee />} />
+        <Route path="/employee/calenderemployee" element={<EmployeeProtectedRoute><EmployeeProvider><CalenderEmployee /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/* Applay leave */}
-        <Route path="/employee/applyleaveemp" element={<ApplyLeaveEmp />} />
+        <Route path="/employee/applyleaveemp" element={<EmployeeProtectedRoute><EmployeeProvider><ApplyLeaveEmp /></EmployeeProvider></EmployeeProtectedRoute>} />
+        {/* Employee leave status */}
+        <Route path="/employee/leave/status" element={<EmployeeProtectedRoute><EmployeeProvider><EmployeeLeaveStatus /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/* Create tickets */}
-        <Route path="/employee/tickets" element={<EmployeeTickets />} />
+        <Route path="/employee/tickets" element={<EmployeeProtectedRoute><EmployeeProvider><EmployeeTickets /></EmployeeProvider></EmployeeProtectedRoute>} />
         {/*  */}
-        <Route path="/hrsignup" element={<HrandAdminSignup />} />
-        <Route path="/hrlogin" element={<HRLogin />} />
-        <Route path="/hrhome" element={<HrHome />} />
+
 
         {/* Admin starts */}
 
@@ -107,46 +120,70 @@ function App() {
         {/* Login for admin */}
         <Route path="/adminlogin" element={<AdminLogin />} />
         {/* Admin Home page */}
-        <Route path="/adminhome" element={<AdminHome />} />
+        <Route path="/adminhome" element={<ProtectedRoute><AdminHome /></ProtectedRoute>} />
         {/* Add an employee */}
-        <Route path="/admin/addemployees" element={<AddEmployees />} />
+        <Route path="/admin/addemployees" element={<ProtectedRoute><AddEmployees /></ProtectedRoute>} />
         {/* Update an employee */}
-        <Route path="/admin/editemployees/:id" element={<EditEmployees />} />
+        <Route path="/admin/editemployees/:id" element={<ProtectedRoute><EditEmployees /></ProtectedRoute>} />
         {/* List of all employees */}
-        <Route path="/allemployees" element={<AllEmployees />} />
-        {/* Pay employee salary */}
-        <Route path="/paysalary/:id" element={<Paysalary />} />
+        <Route path="/allemployees" element={<ProtectedRoute><AllEmployees /></ProtectedRoute>} />
         {/* Payment page of all employee to select one */}
-        <Route path="/allsalary" element={<AllPaySalary />} />
-        {/* Delete an employee */}
-        {/* <Route path="/admin/delete/:id" element={<DeleteEmployee />} /> */}
+        <Route path="/allsalary" element={<ProtectedRoute><AllPaySalary /></ProtectedRoute>} />
+        {/* Pay employee salary */}
+        <Route path="/paysalary/:id" element={<ProtectedRoute><Paysalary /></ProtectedRoute>} />
         {/* Transaction history of all employee */}
-        <Route path="/admin/transactionhistoty" element={<AllTransactionHistory />} />
-        {/* Manage  All activites */}
-        <Route path="/admin/management" element={<Management />} />
+        <Route path="/admin/transactionhistoty" element={<ProtectedRoute><AllTransactionHistory /></ProtectedRoute>} />
+        {/* Manage  All activites , Asign task, View task */}
+        <Route path="/admin/management" element={<ProtectedRoute><Management /></ProtectedRoute>} />
         {/* View High priority Tickets */}
-        <Route path="/admin/highprioritytickets" element={<AdminHighPriorityTickets />} />
+        <Route path="/admin/highprioritytickets" element={<ProtectedRoute><AdminHighPriorityTickets /></ProtectedRoute>} />
         {/* View Medium priority Tickets */}
-        <Route path="/admin/mediumprioritytickets" element={<AdminMediumPriorityTickets />} />
+        <Route path="/admin/mediumprioritytickets" element={<ProtectedRoute><AdminMediumPriorityTickets /></ProtectedRoute>} />
         {/* View Low priority Tickets */}
-        <Route path="/admin/lowprioritytickets" element={<AdminLowPriorityTickets />} />
-        {/* View Leave Request */}
-        <Route path="/admin/leaverequest" element={<LeaveRequest />} />
+        <Route path="/admin/lowprioritytickets" element={<ProtectedRoute><AdminLowPriorityTickets /></ProtectedRoute>} />
         {/* Acces leave request, approved request and rejected */}
-        <Route path="/admin/timesheet" element={<AdminTimeSheet />} />
+        <Route path="/admin/timesheet" element={<ProtectedRoute><AdminTimeSheet /></ProtectedRoute>} />
+        {/* View Leave Request */}
+        <Route path="/admin/leaverequest" element={<ProtectedRoute><LeaveRequest /></ProtectedRoute>} />
         {/* Detail of Rejected leave request */}
-        <Route path='/admin/rejectedleaverequest' element={<RejectedLeaveRequest />} />
+        <Route path='/admin/rejectedleaverequest' element={<ProtectedRoute><RejectedLeaveRequest /></ProtectedRoute>} />
         {/* Detail of Approved leave request */}
-        <Route path="/admin/approvedleaverequest" element={<ApprovedLeaveRequest />} />
+        <Route path="/admin/approvedleaverequest" element={<ProtectedRoute><ApprovedLeaveRequest /></ProtectedRoute>} />
 
 
         {/* Admin Ends */}
 
         {/* HR starts */}
+
+        <Route path="/navbarhr" element={<NavbarHr />} />
+        <Route path="/sidebarhr" element={<SidebarHr />} />
+        {/* Signup for Hr */}
+        <Route path="/hrsignup" element={<HrandAdminSignup />} />
+        {/* Login for Hr */}
+        <Route path="/hrlogin" element={<HRLogin />} />
+        {/* Reset HR password */}
+        <Route path="/hr/resetpassword" element={<HrProtectedRoute><HrResetPassword /></HrProtectedRoute>} />
+        {/* hr home */}
+        <Route path="/hrhome" element={<HrProtectedRoute><HrHome /></HrProtectedRoute>} />
         {/* View all employees */}
-        <Route path="/hr/allemployees" element={<HrAllEmployees />} />
-        {/* Edit Employees */}
-        <Route path="/hr/editemployees/:id" element={<HrEditEmployees />} />
+        <Route path="/hr/allemployees" element={<HrProtectedRoute><HrAllEmployees /></HrProtectedRoute>} />
+        {/* Payment page of all employee to select one */}
+        <Route path="/hr/allsalary" element={<HrProtectedRoute><HrAllPaySalary /></HrProtectedRoute>} />
+        {/* Pay employee salary */}
+        <Route path="/hr/paysalary/:id" element={<HrProtectedRoute><HrPaysalary /></HrProtectedRoute>} />
+        {/* Transaction history of all employee */}
+        <Route path="/hr/transactionhistoty" element={<HrProtectedRoute><HrAllTransactionHistory /></HrProtectedRoute>} />
+        {/* Acces leave request, approved request and rejected */}
+        <Route path="/hr/timesheet" element={<HrProtectedRoute><HrTimeSheet /></HrProtectedRoute>} />
+        {/* View Leave Request */}
+        <Route path="/hr/leaverequest" element={<HrProtectedRoute><HrEmployeeLeaveRequest /></HrProtectedRoute>} />
+        {/* Detail of Rejected leave request */}
+        <Route path='/hr/rejectedleaverequest' element={<HrProtectedRoute><HrRejectedLeaveRequest /></HrProtectedRoute>} />
+        {/* Detail of Approved leave request */}
+        <Route path="/hr/approvedleaverequest" element={<HrProtectedRoute><HrApprovedLeaveRequest /></HrProtectedRoute>} />
+        {/* Manage  All activites , Asign task, View task */}
+        <Route path="/hr/management" element={<HrProtectedRoute><HrManagement /></HrProtectedRoute>} />
+
         {/* HR ends */}
 
         {/* Complete Component Ends */}

@@ -21,14 +21,11 @@ const EmployeeSalary = () => {
     }
 
     return (
-        <div class="d-flex  bg-secondary-subtle" id="wrapper">
-
+        <div className="d-flex  bg-secondary-subtle" id="wrapper">
             {/* Sidebar starts here */}
             <Sidebar />
             {/* Sidebar ends here */}
-
             <div className='w-100' id="page-content-wrapper">
-
                 {/* Navigation bar starts here */}
                 <Navbar />
                 {/* Navigation bar Ends here */}
@@ -48,12 +45,12 @@ const EmployeeSalary = () => {
                             {details.map((detail, index) => (
                                 <tr key={index}>
                                     <th scope="row">{index + 1}</th>
-                                    <td>{detail.date_of_payment}</td>
+                                    <td>{new Date(detail.date_of_payment).toLocaleDateString()}</td>
                                     <td>{detail.no_of_days_worked}</td>
                                     <td>{detail.netSalary}</td>
                                     <td >
-                                        <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        onClick={()=>handleSelectedDetail(detail)}
+                                        <button type="button" className="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            onClick={() => handleSelectedDetail(detail)}
                                         >More info</button>
                                     </td>
                                 </tr>
@@ -63,14 +60,14 @@ const EmployeeSalary = () => {
                 </div>
             </div>
             {/* Modal  start*/}
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Details</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-md">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <div className='text-center'>
                                 <h4>Hermes System</h4>
                                 <p className='m-0'>1234 Innovation Drive</p>
@@ -83,10 +80,10 @@ const EmployeeSalary = () => {
                             <div className='d-flex justify-content-between'>
                                 <div className='d-flex flex-column text-start fw-bold'>
                                     <p>Employee Name: {selectedDetail.employee_name}</p>
-                                    <p>Designation: {selectedDetail.designation} </p>
+                                    <p>Employee ID: {selectedDetail.employee_id} </p>
                                 </div>
                                 <div className='d-flex flex-column text-end'>
-                                    <p>Pay period: {selectedDetail.date_of_payment}</p>
+                                    <p>Pay period: {new Date(selectedDetail.date_of_payment).toLocaleDateString()}</p>
                                     <p>Worked Days:{selectedDetail.no_of_days_worked}</p>
                                 </div>
                             </div>
@@ -105,7 +102,7 @@ const EmployeeSalary = () => {
                                     <hr></hr>
                                     <div className='d-flex'>
                                         <p className='pe-4'>Total Earnings</p>
-                                        <p>{selectedDetail.basicPay+selectedDetail.additions}</p>
+                                        <p>{selectedDetail.basicPay + selectedDetail.additions}</p>
                                     </div>
 
                                 </div>
@@ -133,8 +130,8 @@ const EmployeeSalary = () => {
 
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-info" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

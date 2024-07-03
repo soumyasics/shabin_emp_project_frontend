@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react';
 import SidebarHr from '../../Component/HR/SidebarHr';
 import NavbarHr from '../../Component/HR/NavbarHr';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const HrAllEmployees = () => {
   const [detail, setDetail] = useState([])
-  const [employeeToDelete, setEmployeeToDelete] = useState(null)
-
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/allemployee')
+      .get('http://localhost:3001/hr/allemployees')
       .then((res => {
         setDetail(res.data.data)
       }))
@@ -19,16 +16,6 @@ const HrAllEmployees = () => {
         setDetail(err)
       }))
   }, [])
-  const deleteEmployee = () => {
-    axios
-      .delete(`http://localhost:3001/admin/deletebyid/${employeeToDelete}`)
-      .then(() => {
-        setDetail(detail.filter(employee => employee._id !== employeeToDelete))
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
   return (
     <div className='d-flex bg-secondary-subtle' id='wrapper'>
       <SidebarHr />
@@ -44,7 +31,6 @@ const HrAllEmployees = () => {
                 <th scope="col">Employee Name</th>
                 <th scope="col">Designation</th>
                 <th scope="col">Join Date</th>
-                <th scope="col" className='text-center'>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -53,45 +39,12 @@ const HrAllEmployees = () => {
                   <th scope="row">{a.employee_name}</th>
                   <td>{a.designation}</td>
                   <td>{new Date(a.date_of_joining).toLocaleDateString()}</td>
-                  <td style={{ width: '250px' }}>
-                    <div className='row justify-content-end '>
-                      <div className='col-4 '>
-                        <Link to={`/hr/editemployees/${a._id}`} type="button" className="btn btn-primary btn-sm p-0">Edit</Link>
-                      </div>
-                      <div className='col-4'>
-                        <button type="button" className="btn btn-danger btn-sm p-0" data-bs-toggle="modal" data-bs-target={'#exampleModal'}
-                          onClick={() => setEmployeeToDelete(a._id)}>delete
-                        </button>
-                      </div>
-                    </div>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      {/* Modal starts */}
-      <div className="modal fade" id={'exampleModal'} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-md modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5 text-danger" id="exampleModalLabel">Termination</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <h5 className='text-warning'>Do you really want to Delete this employee and Data?</h5>
-            </div>
-            <div className="modal-footer">
-              <div className='d-flex'>
-                <button type="button" className="btn btn-success" data-bs-dismiss="modal">No</button>
-                <button type="button" onClick={deleteEmployee} className="btn btn-danger ms-2" data-bs-dismiss="modal">Terminate</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Modal starts */}
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SidebarAdmin from '../../Component/Admin/SidebarAdmin';
-import NavbarAdmin from '../../Component/Admin/NavbarAdmin';
+import SidebarHr from '../../Component/HR/SidebarHr';
+import NavbarHr from '../../Component/HR/NavbarHr';
 
-const ApprovedLeaveRequest = () => {
+const HrApprovedLeaveRequest = () => {
     const [approvedLeaves, setApprovedLeaves] = useState([])
     const [leaveDetail, setLeaveDetail] = useState('')
     useEffect(() => {
         axios
-            .get('http://localhost:3001/admin/approvedLeave')
+            .get('http://localhost:3001/hr/approvedLeave')
             .then((res => {
                 setApprovedLeaves(res.data.data)
             }))
@@ -18,9 +18,9 @@ const ApprovedLeaveRequest = () => {
     }, [])
     return (
         <div className='d-flex bg-secondary-subtle ' id='wrapper'>
-            <SidebarAdmin />
+            <SidebarHr />
             <div className='w-100' id='page-content-wrapper'>
-                <NavbarAdmin />
+                <NavbarHr />
                 <h3 className='my-4 mx-2 p-2 rounded text-center bg-white shadow text-success'>Approved Leave Request</h3>
 
                 <div className='table-responsive m-1 rounded'>
@@ -82,4 +82,4 @@ const ApprovedLeaveRequest = () => {
     )
 }
 
-export default ApprovedLeaveRequest
+export default HrApprovedLeaveRequest
