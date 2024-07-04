@@ -31,7 +31,7 @@ function EmployeeProfile() {
                 <h3 className="my-4 mx-2 p-2 rounded text-center bg-white shadow">Profile</h3>
                 <div className='d-flex justify-content-between m-3 bg-white p-2 rounded'>
                     <div className='w-50'>
-                        <img className='rounded-circle img-fluid w-25 shadow' src={profilePictureSrc} alt='profile' />
+                        <img className='rounded-circle img-fluid shadow' style={{height:'150px', width:'150px'}} src={profilePictureSrc} alt='profile' />
                         <div >
                             <h4 className='text-success text-uppercase m-2'>{details.employee_name}</h4>
                             <h6 className='fw-bold'><i className="bi bi-suitcase-lg m-2"></i> {details.designation}</h6>

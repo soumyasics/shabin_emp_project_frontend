@@ -3,6 +3,7 @@ import axios from 'axios';
 import SidebarAdmin from '../../Component/Admin/SidebarAdmin';
 import NavbarAdmin from '../../Component/Admin/NavbarAdmin';
 import { useNavigate } from 'react-router-dom';
+import { validateForm } from '../../Utils/Validation';
 
 
 const AddEmployees = () => {
@@ -41,6 +42,7 @@ const AddEmployees = () => {
         passout_year_2: "",
         institute_2: "",
     })
+    const [errors, setErrors] = useState({})
     const handlChange = (e) => {
         const { name, value, files } = e.target
         if (files) {
@@ -52,7 +54,16 @@ const AddEmployees = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        const requiredFields = ['employee_name', 'employee_id', 'date_of_birth', 'designation', 'profile_picture', 'date_of_joining', 'house_number',
+            'street_name', 'city', 'landmark', 'zip', 'district', 'state', 'country', 'primary_phone', 'secondary_phone', 'email', 'pan_no',
+            'aadhar_no', 'pf_no', 'bank', 'ifsc_code', 'account_no', 'course', 'passout_year', 'institute', 'course_1', 'passout_year_1',
+            'institute_1', 'course_2', 'passout_year_2', 'institute_2'
+        ];
+        const errors = validateForm(form, requiredFields)
+        setErrors(errors);
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
         const formData = new FormData()
         for (const key in form) {
             formData.append(key, form[key])
@@ -99,6 +110,8 @@ const AddEmployees = () => {
                                 name='employee_name'
                                 value={form.employee_name}
                                 onChange={handlChange} />
+                            {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
+
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="employeeid4" className="form-label">Employee ID</label>
@@ -106,6 +119,7 @@ const AddEmployees = () => {
                                 name='employee_id'
                                 value={form.employee_id}
                                 onChange={handlChange} />
+                            {errors.employee_id && <small className="text-danger">{errors.employee_id}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="dateofbirth4" className="form-label">Date of birth</label>
@@ -113,6 +127,7 @@ const AddEmployees = () => {
                                 name='date_of_birth'
                                 value={form.date_of_birth}
                                 onChange={handlChange} />
+                            {errors.date_of_birth && <small className="text-danger">{errors.date_of_birth}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="designation4" className="form-label">Designation</label>
@@ -126,6 +141,7 @@ const AddEmployees = () => {
                                 <option>Fullstack Developer</option>
                                 <option>Tester</option>
                             </select>
+                            {errors.designation && <small className="text-danger">{errors.designation}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="profile_picture" className="form-label">Upload Profile Picture</label>
@@ -133,6 +149,7 @@ const AddEmployees = () => {
                                 name='profile_picture'
                                 // value={form.profile_picture}
                                 onChange={handlChange} />
+                            {errors.profile_picture && <small className="text-danger">{errors.profile_picture}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="unknown4" className="form-label">Date of Joining</label>
@@ -140,6 +157,7 @@ const AddEmployees = () => {
                                 name='date_of_joining'
                                 value={form.date_of_joining}
                                 onChange={handlChange} />
+                            {errors.date_of_joining && <small className="text-danger">{errors.date_of_joining}</small>}
                         </div>
 
                         <p className="fw-bolder mb-0 mt-5 ps-4">Permanent Adress</p>
@@ -149,6 +167,7 @@ const AddEmployees = () => {
                                 name='house_number'
                                 value={form.house_number}
                                 onChange={handlChange} />
+                            {errors.house_number && <small className="text-danger">{errors.house_number}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="streetname4" className="form-label">Street Name</label>
@@ -156,6 +175,7 @@ const AddEmployees = () => {
                                 name='street_name'
                                 value={form.street_name}
                                 onChange={handlChange} />
+                            {errors.street_name && <small className="text-danger">{errors.street_name}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="city4" className="form-label">City</label>
@@ -163,6 +183,7 @@ const AddEmployees = () => {
                                 name='city'
                                 value={form.city}
                                 onChange={handlChange} />
+                            {errors.city && <small className="text-danger">{errors.city}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="landmark4" className="form-label">Land Mark</label>
@@ -170,6 +191,7 @@ const AddEmployees = () => {
                                 name='landmark'
                                 value={form.landmark}
                                 onChange={handlChange} />
+                            {errors.landmark && <small className="text-danger">{errors.landmark}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="zip4" className="form-label">ZIP</label>
@@ -177,6 +199,8 @@ const AddEmployees = () => {
                                 name='zip'
                                 value={form.zip}
                                 onChange={handlChange} />
+                            {errors.zip && <small className="text-danger">{errors.zip}</small>}
+
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="district4" className="form-label">District</label>
@@ -184,6 +208,7 @@ const AddEmployees = () => {
                                 name='district'
                                 value={form.district}
                                 onChange={handlChange} />
+                            {errors.district && <small className="text-danger">{errors.district}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="state4" className="form-label">State</label>
@@ -191,6 +216,8 @@ const AddEmployees = () => {
                                 name='state'
                                 value={form.state}
                                 onChange={handlChange} />
+                            {errors.state && <small className="text-danger">{errors.state}</small>}
+
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="country4" className="form-label">Country</label>
@@ -198,6 +225,8 @@ const AddEmployees = () => {
                                 name='country'
                                 value={form.country}
                                 onChange={handlChange} />
+                            {errors.country && <small className="text-danger">{errors.country}</small>}
+
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="primaryphone4" className="form-label">Primary Phone</label>
@@ -205,6 +234,8 @@ const AddEmployees = () => {
                                 name='primary_phone'
                                 value={form.primary_phone}
                                 onChange={handlChange} />
+                            {errors.primary_phone && <small className="text-danger">{errors.primary_phone}</small>}
+
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="secondaryphone4" className="form-label">Secondary Phone</label>
@@ -212,6 +243,8 @@ const AddEmployees = () => {
                                 name='secondary_phone'
                                 value={form.secondary_phone}
                                 onChange={handlChange} />
+                            {errors.secondary_phone && <small className="text-danger">{errors.secondary_phone}</small>}
+
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="secondaryemail4" className="form-label">Email ID</label>
@@ -219,6 +252,8 @@ const AddEmployees = () => {
                                 name='email'
                                 value={form.email}
                                 onChange={handlChange} />
+                            {errors.email && <small className="text-danger">{errors.email}</small>}
+
                         </div>
 
                         <p className="fw-bolder mb-0 mt-5 ps-4 ">Other Statutory information</p>
@@ -228,6 +263,8 @@ const AddEmployees = () => {
                                 name='pan_no'
                                 value={form.pan_no}
                                 onChange={handlChange} />
+                            {errors.pan_no && <small className="text-danger">{errors.pan_no}</small>}
+
                         </div>
                         {/* problem */}
                         <div className="col-md-2">
@@ -236,6 +273,8 @@ const AddEmployees = () => {
                                 name='aadhar_no'
                                 value={form.aadhar_no}
                                 onChange={handlChange} />
+                            {errors.aadhar_no && <small className="text-danger">{errors.aadhar_no}</small>}
+
                         </div>
                         {/* problem */}
                         <div className="col-md-2">
@@ -244,6 +283,8 @@ const AddEmployees = () => {
                                 name='pf_no'
                                 value={form.pf_no}
                                 onChange={handlChange} />
+                            {errors.pf_no && <small className="text-danger">{errors.pf_no}</small>}
+
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="bank4" className="form-label">Bank</label>
@@ -251,6 +292,8 @@ const AddEmployees = () => {
                                 name='bank'
                                 value={form.bank}
                                 onChange={handlChange} />
+                            {errors.bank && <small className="text-danger">{errors.bank}</small>}
+
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="ifsccode4" className="form-label">IFSC Code</label>
@@ -258,6 +301,7 @@ const AddEmployees = () => {
                                 name='ifsc_code'
                                 value={form.ifsc_code}
                                 onChange={handlChange} />
+                            {errors.ifsc_code && <small className="text-danger">{errors.ifsc_code}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="accountno4" className="form-label">Account No</label>
@@ -265,6 +309,7 @@ const AddEmployees = () => {
                                 name='account_no'
                                 value={form.account_no}
                                 onChange={handlChange} />
+                            {errors.account_no && <small className="text-danger">{errors.account_no}</small>}
                         </div>
 
                         <p className="fw-bolder mb-0 mt-5 ps-4 ">Educational Details</p>
@@ -275,6 +320,7 @@ const AddEmployees = () => {
                                 name='course'
                                 value={form.course}
                                 onChange={handlChange} />
+                            {errors.course && <small className="text-danger">{errors.course}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="passout4" className="form-label">Passout Year</label>
@@ -282,6 +328,7 @@ const AddEmployees = () => {
                                 name='passout_year'
                                 value={form.passout_year}
                                 onChange={handlChange} />
+                            {errors.passout_year && <small className="text-danger">{errors.passout_year}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="institute4" className="form-label">Institute</label>
@@ -289,6 +336,7 @@ const AddEmployees = () => {
                                 name='institute'
                                 value={form.institute}
                                 onChange={handlChange} />
+                            {errors.institute && <small className="text-danger">{errors.institute}</small>}
                         </div>
 
                         <div className="col-md-4">
@@ -297,6 +345,7 @@ const AddEmployees = () => {
                                 name='course_1'
                                 value={form.course_1}
                                 onChange={handlChange} />
+                            {errors.course_1 && <small className="text-danger">{errors.course_1}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="passout5" className="form-label">Passout Year</label>
@@ -304,6 +353,7 @@ const AddEmployees = () => {
                                 name='passout_year_1'
                                 value={form.passout_year_1}
                                 onChange={handlChange} />
+                            {errors.passout_year_1 && <small className="text-danger">{errors.passout_year_1}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="institute5" className="form-label">Institute</label>
@@ -311,6 +361,7 @@ const AddEmployees = () => {
                                 name='institute_1'
                                 value={form.institute_1}
                                 onChange={handlChange} />
+                            {errors.institute_1 && <small className="text-danger">{errors.institute_1}</small>}
                         </div>
 
                         <div className="col-md-4">
@@ -319,6 +370,7 @@ const AddEmployees = () => {
                                 name='course_2'
                                 value={form.course_2}
                                 onChange={handlChange} />
+                            {errors.course_2 && <small className="text-danger">{errors.course_2}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="passout6" className="form-label">Passout Year</label>
@@ -326,6 +378,7 @@ const AddEmployees = () => {
                                 name='passout_year_2'
                                 value={form.passout_year_2}
                                 onChange={handlChange} />
+                            {errors.passout_year_2 && <small className="text-danger">{errors.passout_year_2}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="institute6" className="form-label">Institute</label>
@@ -333,6 +386,7 @@ const AddEmployees = () => {
                                 name='institute_2'
                                 value={form.institute_2}
                                 onChange={handlChange} />
+                            {errors.institute_2 && <small className="text-danger">{errors.institute_2}</small>}
                         </div>
 
                         <div className="col-6">

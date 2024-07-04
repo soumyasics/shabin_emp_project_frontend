@@ -50,10 +50,10 @@ function AllEmployees() {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th scope="col">Employee Name</th>
-                                <th scope="col">Designation</th>
-                                <th scope="col">Join Date</th>
-                                <th scope="col" className='text-center'>Action</th>
+                                <th scope="col" className='text-success'>Employee Name</th>
+                                <th scope="col" className='text-success'>Designation</th>
+                                <th scope="col" className='text-success'>Join Date</th>
+                                <th scope="col" className='text-center text-success'>Action</th>
                             </tr>
                         </thead>
                         <tbody>

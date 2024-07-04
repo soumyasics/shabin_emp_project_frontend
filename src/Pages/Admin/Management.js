@@ -3,16 +3,27 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SidebarAdmin from '../../Component/Admin/SidebarAdmin';
 import NavbarAdmin from '../../Component/Admin/NavbarAdmin';
+import { validateForm } from '../../Utils/Validation';
 
 const Management = () => {
     const [form, setForm] = useState({})
     const [loading, setLoading] = useState(false)
+    const [errors, setErrors] = useState({})
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        const requiredFields = [
+            'email', 'employee_name', 'heading', 'date_of_submission', 'task_text'
+        ];
+        const errors = validateForm(form, requiredFields);
+        setErrors(errors)
+
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
         setLoading(true)
         axios
             .post('http://localhost:3001/admin/tasks/create', form)
@@ -85,6 +96,7 @@ const Management = () => {
                                             value={form.email || ''}
                                             onChange={handleChange}
                                         />
+                                        {errors.email && <small className="text-danger">{errors.email}</small>}
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Name</label>
@@ -94,6 +106,7 @@ const Management = () => {
                                             value={form.employee_name || ''}
                                             onChange={handleChange}
                                         />
+                                        {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="heading" className="form-label">Headin</label>
@@ -103,6 +116,7 @@ const Management = () => {
                                             value={form.heading || ''}
                                             onChange={handleChange}
                                         />
+                                        {errors.heading && <small className="text-danger">{errors.heading}</small>}
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor='finalDate' className='form-label'>Submit before</label>
@@ -112,6 +126,7 @@ const Management = () => {
                                             value={form.date_of_submission || ''}
                                             onChange={handleChange}
                                         />
+                                        {errors.date_of_submission && <small className="text-danger">{errors.date_of_submission}</small>}
                                     </div>
                                     <div className="form-floating">
                                         <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea"
@@ -119,6 +134,7 @@ const Management = () => {
                                             value={form.task_text || ''}
                                             onChange={handleChange}
                                         ></textarea>
+                                        {errors.task_text && <small className="text-danger">{errors.task_text}</small>}
                                         <label htmlFor="floatingTextarea">Details</label>
                                     </div>
                                 </form>

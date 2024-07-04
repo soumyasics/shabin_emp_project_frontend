@@ -12,7 +12,7 @@ const AdminLowPriorityTickets = () => {
     const [detail, setDetail] = useState([])
     useEffect(() => {
         axios
-            .get('http://localhost:3001/admin/highprioritytickets')
+            .get('http://localhost:3001/admin/lowprioritytickets')
             .then((res => {
                 setDetail(res.data.data)
             }))

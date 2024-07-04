@@ -4,6 +4,7 @@ import Sidebar from '../../Component/Employee/Sidebar';
 import Navbar from '../../Component/Employee/Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { validateForm } from '../../Utils/Validation';
 
 
 const ApplyLeaveEmp = () => {
@@ -17,6 +18,7 @@ const ApplyLeaveEmp = () => {
         reason: '',
     })
     const navigate = useNavigate()
+    const [errors, setErrors] = useState({})
     useEffect(() => {
         axios
             .get('http://localhost:3001/employee/employeeprofile', { withCredentials: true })
@@ -33,6 +35,16 @@ const ApplyLeaveEmp = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const requiredFields = [
+            'employee_name', 'employee_id', 'designation', 'from', 'to', 'typeOfLeave', 'reason',
+        ];
+        const errors = validateForm(form, requiredFields);
+        setErrors(errors)
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
+
         const days = (new Date(form.to) - new Date(form.from)) / (1000 * 60 * 60 * 24) + 1
         axios
             .post('http://localhost:3001/employee/leaveapply', form, { withCredentials: true })
@@ -72,6 +84,7 @@ const ApplyLeaveEmp = () => {
                                 onChange={handleOnChange}
                                 readOnly
                             />
+                            {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
                         </div>
                         <div className='col-md-4'>
                             <label htmlFor='employeeid' className='form-label'>Employee ID</label>
@@ -82,6 +95,7 @@ const ApplyLeaveEmp = () => {
                                 onChange={handleOnChange}
                                 readOnly
                             />
+                            {errors.employee_id && <small className="text-danger">{errors.employee_id}</small>}
                         </div>
                         <div className='col-md-4'>
                             <label htmlFor='designation' className='form-label'>Designation</label>
@@ -92,6 +106,7 @@ const ApplyLeaveEmp = () => {
                                 onChange={handleOnChange}
                                 readOnly
                             />
+                            {errors.designation && <small className="text-danger">{errors.designation}</small>}
                         </div>
                         <div className='col-md-4'>
                             <label htmlFor='employeename' className='form-label'>From</label>
@@ -101,6 +116,7 @@ const ApplyLeaveEmp = () => {
                                 value={form.from}
                                 onChange={handleOnChange}
                             />
+                            {errors.from && <small className="text-danger">{errors.from}</small>}
                         </div>
                         <div className='col-md-4'>
                             <label htmlFor='employeename' className='form-label'>To</label>
@@ -110,6 +126,7 @@ const ApplyLeaveEmp = () => {
                                 value={form.to}
                                 onChange={handleOnChange}
                             />
+                            {errors.to && <small className="text-danger">{errors.to}</small>}
                         </div>
                         <div className='col-md-4'>
                             <label htmlFor='typeofleave' className='form-label'>Type Of Leave</label>
@@ -123,6 +140,7 @@ const ApplyLeaveEmp = () => {
                                 <option>Casual leave</option>
                                 <option>Leave without pay</option>
                             </select>
+                            {errors.typeOfLeave && <small className="text-danger">{errors.typeOfLeave}</small>}
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">Reason</label>
@@ -132,6 +150,7 @@ const ApplyLeaveEmp = () => {
                                 value={form.reason}
                                 onChange={handleOnChange}
                             ></textarea>
+                            {errors.reason && <small className="text-danger">{errors.reason}</small>}
                         </div>
                         <div>
                             <button type="submit" className="btn btn-primary bg-success" ><i className="bi bi-upload"></i> Apply</button>

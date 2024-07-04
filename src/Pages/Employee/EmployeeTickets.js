@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../Component/Employee/Navbar';
 import Sidebar from '../../Component/Employee/Sidebar';
 import axios from 'axios';
+import { validateForm } from '../../Utils/Validation';
+import { useNavigate } from 'react-router-dom';
 
 const EmployeeTickets = () => {
   const [form, setForm] = useState({
@@ -11,7 +13,9 @@ const EmployeeTickets = () => {
     type: '',
     explain: ''
   })
-  
+  const [errors, setErrors] = useState({})
+  const navigate =useNavigate()
+
   useEffect(() => {
     axios
       .get('http://localhost:3001/employee/employeeprofile', { withCredentials: true })
@@ -28,11 +32,22 @@ const EmployeeTickets = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
   const handleSubmit = () => {
+    const requiredFields = [
+      'employee_name', 'employee_id', 'subject', 'type', 'explain'
+    ]
+    const errors = validateForm(form, requiredFields)
+    setErrors(errors)
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     axios
       .post('http://localhost:3001/employee/tickets', form, { withCredentials: true })
       .then((res) => {
         console.log(res);
         alert("Ticket rised successfully")
+        navigate('/employee/tickets')
+        
       })
       .catch((err) => {
         console.log(err);
@@ -56,6 +71,7 @@ const EmployeeTickets = () => {
                 value={form.employee_id}
                 onChange={handleChange}
               />
+              {errors.employee_id && <small className="text-danger">{errors.employee_id}</small>}
             </div>
             <div className="col-md-6">
               <label for="employeename" className="form-label">Employee Name</label>
@@ -65,6 +81,7 @@ const EmployeeTickets = () => {
                 value={form.employee_name}
                 onChange={handleChange}
               />
+              {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
             </div>
             <div className="col-md-6">
               <label for="subject" className="form-label">Subject</label>
@@ -74,6 +91,7 @@ const EmployeeTickets = () => {
                 value={form.subject}
                 onChange={handleChange}
               />
+              {errors.subject && <small className="text-danger">{errors.subject}</small>}
             </div>
             <div className="col-md-6">
               <label for="inputState" className="form-label">Type</label>
@@ -87,6 +105,7 @@ const EmployeeTickets = () => {
                 <option>Medium Priority</option>
                 <option>Low Priority</option>
               </select>
+              {errors.type && <small className="text-danger">{errors.type}</small>}
             </div>
             <div className="mb-3">
               <label for="exampleFormControlTextarea1" className="form-label">Explain here</label>
@@ -96,6 +115,7 @@ const EmployeeTickets = () => {
                 value={form.explain}
                 onChange={handleChange}
               ></textarea>
+              {errors.explain && <small className="text-danger">{errors.explain}</small>}
             </div>
             <div className='row justify-content-end p-0 m-0'>
               <div className="col-3" >

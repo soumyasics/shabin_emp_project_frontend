@@ -3,6 +3,7 @@ import axios from 'axios';
 import SidebarAdmin from '../../Component/Admin/SidebarAdmin';
 import NavbarAdmin from '../../Component/Admin/NavbarAdmin';
 import { useNavigate, useParams } from 'react-router-dom';
+import { validateForm } from '../../Utils/Validation';
 
 const EditEmployees = () => {
     const [form, setForm] = useState({
@@ -41,13 +42,20 @@ const EditEmployees = () => {
     });
     const { id } = useParams();
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         axios
             .get(`http://localhost:3001/admin/getEmployeeById/${id}`)
             .then((res) => {
-                setForm(res.data.data)
-                console.log(form);
+                const data = res.data.data
+                setForm({
+                    ...data,
+                    date_of_birth: data.date_of_birth ? new Date(data.date_of_birth).toISOString().split('T')[0] : "",
+                    date_of_joining: data.date_of_joining ? new Date(data.date_of_joining).toISOString().split('T')[0] : "",
+                })
+
+                console.log(res.data.data);
             })
             .catch((err) => {
                 alert("error in loading employee");
@@ -60,11 +68,22 @@ const EditEmployees = () => {
         if (files) {
             setForm({ ...form, [name]: files[0] });
         } else {
-            setForm({ ...form, [name]: value})
+            setForm({ ...form, [name]: value })
         }
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        const requiredFields = [
+            'employee_name', 'employee_id', 'date_of_birth', 'designation', 'profile_picture', 'date_of_joining', 'house_number',
+            'street_name', 'city', 'landmark', 'zip', 'district', 'state', 'country', 'primary_phone', 'secondary_phone', 'email', 'pan_no',
+            'aadhar_no', 'pf_no', 'bank', 'ifsc_code', 'account_no', 'course', 'passout_year', 'institute', 'course_1', 'passout_year_1',
+            'institute_1', 'course_2', 'passout_year_2', 'institute_2'
+        ]
+        const errors = validateForm(form, requiredFields)
+        setErrors(errors)
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
         const formData = new FormData();
         for (const key in form) {
             formData.append(key, form[key]);
@@ -78,7 +97,7 @@ const EditEmployees = () => {
             .then((res) => {
                 console.log(res);
                 alert("Employee Updated")
-                // navigate('/allemployees')
+                navigate('/allemployees')
 
             })
             .catch((error) => {
@@ -112,6 +131,7 @@ const EditEmployees = () => {
                                 name='employee_name'
                                 value={form.employee_name}
                                 onChange={handleChange} />
+                            {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="employeeid4" className="form-label">Employee ID</label>
@@ -119,6 +139,7 @@ const EditEmployees = () => {
                                 name='employee_id'
                                 value={form.employee_id}
                                 onChange={handleChange} />
+                            {errors.employee_id && <small className="text-danger">{errors.employee_id}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="dateofbirth4" className="form-label">Date of birth</label>
@@ -126,6 +147,7 @@ const EditEmployees = () => {
                                 name='date_of_birth'
                                 value={form.date_of_birth}
                                 onChange={handleChange} />
+                            {errors.date_of_birth && <small className="text-danger">{errors.date_of_birth}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="designation4" className="form-label">Designation</label>
@@ -139,12 +161,14 @@ const EditEmployees = () => {
                                 <option>Fullstack Developer</option>
                                 <option>Tester</option>
                             </select>
+                            {errors.designation && <small className="text-danger">{errors.designation}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="formFile" className="form-label">Upload Profile Picture</label>
                             <input className="form-control" type="file" id="formFile"
                                 name='profile_picture'
                                 onChange={handleChange} />
+                            {errors.profile_picture && <small className="text-danger">{errors.profile_picture}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="unknown4" className="form-label">Date of Joining</label>
@@ -152,6 +176,7 @@ const EditEmployees = () => {
                                 name='date_of_joining'
                                 value={form.date_of_joining}
                                 onChange={handleChange} />
+                            {errors.date_of_joining && <small className="text-danger">{errors.date_of_joining}</small>}
                         </div>
 
                         <p className="fw-bolder mb-0 mt-5 ps-4">Permanent Adress</p>
@@ -161,6 +186,7 @@ const EditEmployees = () => {
                                 name='house_number'
                                 value={form.house_number}
                                 onChange={handleChange} />
+                            {errors.house_number && <small className="text-danger">{errors.house_number}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="streetname4" className="form-label">Street Name</label>
@@ -168,6 +194,7 @@ const EditEmployees = () => {
                                 name='street_name'
                                 value={form.street_name}
                                 onChange={handleChange} />
+                            {errors.street_name && <small className="text-danger">{errors.street_name}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="city4" className="form-label">City</label>
@@ -175,6 +202,7 @@ const EditEmployees = () => {
                                 name='city'
                                 value={form.city}
                                 onChange={handleChange} />
+                            {errors.city && <small className="text-danger">{errors.city}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="landmark4" className="form-label">Land Mark</label>
@@ -182,6 +210,7 @@ const EditEmployees = () => {
                                 name='landmark'
                                 value={form.landmark}
                                 onChange={handleChange} />
+                            {errors.landmark && <small className="text-danger">{errors.landmark}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="zip4" className="form-label">ZIP</label>
@@ -189,6 +218,7 @@ const EditEmployees = () => {
                                 name='zip'
                                 value={form.zip}
                                 onChange={handleChange} />
+                            {errors.zip && <small className="text-danger">{errors.zip}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="district4" className="form-label">District</label>
@@ -196,6 +226,7 @@ const EditEmployees = () => {
                                 name='district'
                                 value={form.district}
                                 onChange={handleChange} />
+                            {errors.district && <small className="text-danger">{errors.district}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="state4" className="form-label">State</label>
@@ -203,6 +234,7 @@ const EditEmployees = () => {
                                 name='state'
                                 value={form.state}
                                 onChange={handleChange} />
+                            {errors.state && <small className="text-danger">{errors.state}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="country4" className="form-label">Country</label>
@@ -210,6 +242,7 @@ const EditEmployees = () => {
                                 name='country'
                                 value={form.country}
                                 onChange={handleChange} />
+                            {errors.country && <small className="text-danger">{errors.country}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="primaryphone4" className="form-label">Primary Phone</label>
@@ -217,6 +250,7 @@ const EditEmployees = () => {
                                 name='primary_phone'
                                 value={form.primary_phone}
                                 onChange={handleChange} />
+                            {errors.primary_phone && <small className="text-danger">{errors.primary_phone}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="secondaryphone4" className="form-label">Secondary Phone</label>
@@ -224,6 +258,7 @@ const EditEmployees = () => {
                                 name='secondary_phone'
                                 value={form.secondary_phone}
                                 onChange={handleChange} />
+                            {errors.secondary_phone && <small className="text-danger">{errors.secondary_phone}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="secondaryemail4" className="form-label">Email ID</label>
@@ -231,6 +266,7 @@ const EditEmployees = () => {
                                 name='email'
                                 value={form.email}
                                 onChange={handleChange} />
+                            {errors.email && <small className="text-danger">{errors.email}</small>}
                         </div>
 
                         <p className="fw-bolder mb-0 mt-5 ps-4 ">Other Statutory information</p>
@@ -240,6 +276,7 @@ const EditEmployees = () => {
                                 name='pan_no'
                                 value={form.pan_no}
                                 onChange={handleChange} />
+                            {errors.pan_no && <small className="text-danger">{errors.pan_no}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="aadharno4" className="form-label">Aadhar No</label>
@@ -247,6 +284,7 @@ const EditEmployees = () => {
                                 name='aadhar_no'
                                 value={form.aadhar_no}
                                 onChange={handleChange} />
+                            {errors.aadhar_no && <small className="text-danger">{errors.aadhar_no}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="pfno4" className="form-label">PF No</label>
@@ -254,6 +292,7 @@ const EditEmployees = () => {
                                 name='pf_no'
                                 value={form.pf_no}
                                 onChange={handleChange} />
+                            {errors.pf_no && <small className="text-danger">{errors.pf_no}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="bank4" className="form-label">Bank</label>
@@ -261,6 +300,7 @@ const EditEmployees = () => {
                                 name='bank'
                                 value={form.bank}
                                 onChange={handleChange} />
+                            {errors.bank && <small className="text-danger">{errors.bank}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="ifsccode4" className="form-label">IFSC Code</label>
@@ -268,6 +308,7 @@ const EditEmployees = () => {
                                 name='ifsc_code'
                                 value={form.ifsc_code}
                                 onChange={handleChange} />
+                            {errors.ifsc_code && <small className="text-danger">{errors.ifsc_code}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="accountno4" className="form-label">Account No</label>
@@ -275,6 +316,7 @@ const EditEmployees = () => {
                                 name='account_no'
                                 value={form.account_no}
                                 onChange={handleChange} />
+                            {errors.account_no && <small className="text-danger">{errors.account_no}</small>}
                         </div>
 
                         <p className="fw-bolder mb-0 mt-5 ps-4 ">Educational Details</p>
@@ -285,6 +327,7 @@ const EditEmployees = () => {
                                 name='course'
                                 value={form.course}
                                 onChange={handleChange} />
+                            {errors.course && <small className="text-danger">{errors.course}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="passout4" className="form-label">Passout Year</label>
@@ -292,6 +335,7 @@ const EditEmployees = () => {
                                 name='passout_year'
                                 value={form.passout_year}
                                 onChange={handleChange} />
+                            {errors.passout_year && <small className="text-danger">{errors.passout_year}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="institute4" className="form-label">Institute</label>
@@ -299,6 +343,7 @@ const EditEmployees = () => {
                                 name='institute'
                                 value={form.institute}
                                 onChange={handleChange} />
+                            {errors.institute && <small className="text-danger">{errors.institute}</small>}
                         </div>
 
                         <div className="col-md-4">
@@ -307,6 +352,7 @@ const EditEmployees = () => {
                                 name='course_1'
                                 value={form.course_1}
                                 onChange={handleChange} />
+                            {errors.course_1 && <small className="text-danger">{errors.course_1}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="passout5" className="form-label">Passout Year</label>
@@ -314,6 +360,7 @@ const EditEmployees = () => {
                                 name='passout_year_1'
                                 value={form.passout_year_1}
                                 onChange={handleChange} />
+                            {errors.passout_year_1 && <small className="text-danger">{errors.passout_year_1}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="institute5" className="form-label">Institute</label>
@@ -321,6 +368,7 @@ const EditEmployees = () => {
                                 name='institute_1'
                                 value={form.institute_1}
                                 onChange={handleChange} />
+                            {errors.institute_1 && <small className="text-danger">{errors.institute_1}</small>}
                         </div>
 
                         <div className="col-md-4">
@@ -329,6 +377,7 @@ const EditEmployees = () => {
                                 name='course_2'
                                 value={form.course_2}
                                 onChange={handleChange} />
+                            {errors.course_2 && <small className="text-danger">{errors.course_2}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="passout6" className="form-label">Passout Year</label>
@@ -336,6 +385,7 @@ const EditEmployees = () => {
                                 name='passout_year_2'
                                 value={form.passout_year_2}
                                 onChange={handleChange} />
+                            {errors.passout_year_2 && <small className="text-danger">{errors.passout_year_2}</small>}
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="institute6" className="form-label">Institute</label>
@@ -343,6 +393,7 @@ const EditEmployees = () => {
                                 name='institute_2'
                                 value={form.institute_2}
                                 onChange={handleChange} />
+                            {errors.institute_2 && <small className="text-danger">{errors.institute_2}</small>}
                         </div>
 
                         <div className="col-6">
