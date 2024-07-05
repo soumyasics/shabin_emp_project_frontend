@@ -101,7 +101,7 @@ const Paysalary = () => {
                                 name='employee_name'
                                 value={form.employee_name}
                                 onChange={handleChange} />
-                                {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
+                            {errors.employee_name && <small className="text-danger">{errors.employee_name}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="employeeid4" className="form-label">EmployeeID</label>
@@ -110,7 +110,7 @@ const Paysalary = () => {
                                 name='employee_id'
                                 value={form.employee_id}
                                 onChange={handleChange} />
-                                {errors.employee_id && <small className="text-danger">{errors.employee_id}</small>}
+                            {errors.employee_id && <small className="text-danger">{errors.employee_id}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="projectname4" className="form-label">Designation</label>
@@ -119,7 +119,7 @@ const Paysalary = () => {
                                 name='designation'
                                 value={form.designation}
                                 onChange={handleChange} />
-                                {errors.designation && <small className="text-danger">{errors.designation}</small>}
+                            {errors.designation && <small className="text-danger">{errors.designation}</small>}
                         </div>
                         <div className="col-md-3">
                             <label htmlFor="projectname4" className="form-label">Date of payment</label>
@@ -127,7 +127,7 @@ const Paysalary = () => {
                                 name='date_of_payment'
                                 value={form.date_of_payment}
                                 onChange={handleChange} />
-                                {errors.date_of_payment && <small className="text-danger">{errors.date_of_payment}</small>}
+                            {errors.date_of_payment && <small className="text-danger">{errors.date_of_payment}</small>}
                         </div>
                     </div>
 
@@ -138,7 +138,7 @@ const Paysalary = () => {
                                 name='totalWorkingDays'
                                 value={form.totalWorkingDays}
                                 onChange={handleChange} />
-                                {errors.totalWorkingDays && <small className="text-danger">{errors.totalWorkingDays}</small>}
+                            {errors.totalWorkingDays && <small className="text-danger">{errors.totalWorkingDays}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="amount4" className="form-label">Leaves</label>
@@ -146,7 +146,7 @@ const Paysalary = () => {
                                 name='leaves'
                                 value={form.leaves}
                                 onChange={handleChange} />
-                                {errors.leaves && <small className="text-danger">{errors.leaves}</small>}
+                            {errors.leaves && <small className="text-danger">{errors.leaves}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="deduction4" className="form-label">Absent</label>
@@ -154,7 +154,7 @@ const Paysalary = () => {
                                 name='absent'
                                 value={form.absent}
                                 onChange={handleChange} />
-                                {errors.absent && <small className="text-danger">{errors.absent}</small>}
+                            {errors.absent && <small className="text-danger">{errors.absent}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="allowence4" className="form-label">No Of Days Worked</label>
@@ -162,7 +162,7 @@ const Paysalary = () => {
                                 name='no_of_days_worked'
                                 value={form.no_of_days_worked}
                                 onChange={handleChange} />
-                                {errors.no_of_days_worked && <small className="text-danger">{errors.no_of_days_worked}</small>}
+                            {errors.no_of_days_worked && <small className="text-danger">{errors.no_of_days_worked}</small>}
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@ const Paysalary = () => {
                                 name='basicPay'
                                 value={form.basicPay}
                                 onChange={handleChange} />
-                                {errors.basicPay && <small className="text-danger">{errors.basicPay}</small>}
+                            {errors.basicPay && <small className="text-danger">{errors.basicPay}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="amount4" className="form-label">Deductions</label>
@@ -181,7 +181,7 @@ const Paysalary = () => {
                                 name='deductions'
                                 value={form.deductions}
                                 onChange={handleChange} />
-                                {errors.deductions && <small className="text-danger">{errors.deductions}</small>}
+                            {errors.deductions && <small className="text-danger">{errors.deductions}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="deduction4" className="form-label">Additions</label>
@@ -189,7 +189,7 @@ const Paysalary = () => {
                                 name='additions'
                                 value={form.additions}
                                 onChange={handleChange} />
-                                {errors.additions && <small className="text-danger">{errors.additions}</small>}
+                            {errors.additions && <small className="text-danger">{errors.additions}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="allowence4" className="form-label">Net Salary</label>
@@ -197,7 +197,7 @@ const Paysalary = () => {
                                 name='netSalary'
                                 value={form.netSalary}
                                 onChange={handleChange} />
-                                {errors.netSalary && <small className="text-danger">{errors.netSalary}</small>}
+                            {errors.netSalary && <small className="text-danger">{errors.netSalary}</small>}
                         </div>
                     </div>
                     <div className="row g-3 justify-content-between">
@@ -208,7 +208,7 @@ const Paysalary = () => {
                                 name='pf_no'
                                 value={form.pf_no}
                                 onChange={handleChange} />
-                                {errors.pf_no && <small className="text-danger">{errors.pf_no}</small>}
+                            {errors.pf_no && <small className="text-danger">{errors.pf_no}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="accountno4" className="form-label">Account Number</label>
@@ -217,7 +217,7 @@ const Paysalary = () => {
                                 name='account_no'
                                 value={form.account_no}
                                 onChange={handleChange} />
-                                {errors.account_no && <small className="text-danger">{errors.account_no}</small>}
+                            {errors.account_no && <small className="text-danger">{errors.account_no}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="bankname4" className="form-label">Bank Name</label>
@@ -226,7 +226,7 @@ const Paysalary = () => {
                                 name='bank'
                                 value={form.bank}
                                 onChange={handleChange} />
-                                {errors.bank && <small className="text-danger">{errors.bank}</small>}
+                            {errors.bank && <small className="text-danger">{errors.bank}</small>}
                         </div>
                         <div className="col-md-2">
                             <label htmlFor="ifsccode4" className="form-label">IFSC Code</label>
@@ -235,10 +235,11 @@ const Paysalary = () => {
                                 name='ifsc_code'
                                 value={form.ifsc_code}
                                 onChange={handleChange} />
-                                {errors.ifsc_code && <small className="text-danger">{errors.ifsc_code}</small>}
+                            {errors.ifsc_code && <small className="text-danger">{errors.ifsc_code}</small>}
                         </div>
                     </div>
-                    <button className="btn btn-primary m-2" type="submit">Initiate Payment</button>
+                    <div className='container'><button className="btn btn-primary mt-2" type="submit">Initiate Payment</button></div>
+
                 </form>
                 {/* Payment Ends here    */}
             </div>
